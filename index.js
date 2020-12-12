@@ -85,14 +85,59 @@ inquirer.prompt ([
 
 const generateReadMe = (answers) => {
 
-    let title = ""
     let badge = "";
+
+    switch (answers.license) {
+        case "Apache 2.0":
+            badge = "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
+            break;
+        case "MIT":
+            badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
+            break;
+        case "GNU GPL v3":
+            badge = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
+            break;
+        case "Mozilla":
+            badge = "[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)";
+            break;
+        case "Boost":
+            badge = "[![License](https://img.shields.io/badge/License-Boost%201.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)";
+            break;
+    }
 
 
 
 return `# ${answers.title}
 
- ##
+ ## Description
+ 
+ ${answers.description}
+
+ ## Usage
+
+ ${answers.usage}
+
+ ## Installation
+
+ ${answers.installation}
+
+ ## Contribute
+
+ ${answers.contributing}
+
+ ## GitHub Info
+
+ - ${answers.username}
+ - ${answers.repo}
+
+ ## Test
+
+ ${answers.tests}
+
+ ## License
+
+ ${badge}
+
 `;
 }
 
