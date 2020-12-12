@@ -1,14 +1,18 @@
 const inquirer = require('inquirer'); 
+const fs = require('fs');
+const util = require('util');
+const writeFileAsync = util.promisify(fs.writeFile);
+const promptUser = () =>
 
-const generateMarkdown = require('./generateMarkdown.js');
+
+//const generateMarkdown = require('./generateMarkdown.js');
 
 // array of questions for user
-const questions = [
+inquirer.prompt ([
     {
         type: 'input',
         message: "What is your GitHub username? (No @ needed)",
         name: 'username',
-        default: 'connietran-dev',
         validate: function (answer) {
             if (answer.length < 1) {
                 return console.log("A valid GitHub username is required.");
@@ -20,7 +24,6 @@ const questions = [
         type: 'input',
         message: "What is the name of your GitHub repo?",
         name: 'repo',
-        default: 'readme-generator',
         validate: function (answer) {
             if (answer.length < 1) {
                 return console.log("A valid GitHub repo is required for a badge.");
@@ -75,19 +78,29 @@ const questions = [
     {
         type: 'list',
         message: "Choose a license for your project.",
-        choices: ['', '', '', '', '', '', '', ''],
+        choices: ['Apache 2.0', 'MIT', 'GNU GPL v3', 'Mozilla', 'Boost'],
         name: 'license'
     }
-];
+]);
 
-// function to write README file
-function writeToFile(fileName, data) {
+const generateReadMe = (answers) => {
+
+    let title = ""
+    let badge = "";
+
+
+
+return `# ${answers.title}
+
+ ##
+`;
 }
 
-// function to initialize program
-function init() {
 
-}
+promptUser()
+.then((answers) => writeFileAsync('README.md',
+generateReadMe(answers)))
 
-// function call to initialize program
-init();
+.then(() => console.log('Your read me is now ready')
+)
+.catch((err) => console.error(err));
