@@ -143,7 +143,7 @@ return `# ${answers.title}
 
 
 promptUser()
-.then((answers) => writeFileAsync('README.md',
+.then((answers) => writeFileAsync('sample.README.md',
 generateReadMe(answers)))
 
 .then(() => console.log('Your read me is now ready')
